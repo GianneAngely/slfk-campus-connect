@@ -15,6 +15,7 @@ import { Route as NotifikasiRouteImport } from './routes/notifikasi'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LaporRouteImport } from './routes/lapor'
 import { Route as BerandaRouteImport } from './routes/beranda'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SatpamIndexRouteImport } from './routes/satpam.index'
 import { Route as LaporIndexRouteImport } from './routes/lapor.index'
@@ -52,6 +53,11 @@ const LaporRoute = LaporRouteImport.update({
 const BerandaRoute = BerandaRouteImport.update({
   id: '/beranda',
   path: '/beranda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -97,6 +103,7 @@ const DetailIdRoute = DetailIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/beranda': typeof BerandaRoute
   '/lapor': typeof LaporRouteWithChildren
   '/login': typeof LoginRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/beranda': typeof BerandaRoute
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
@@ -128,6 +136,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/beranda': typeof BerandaRoute
   '/lapor': typeof LaporRouteWithChildren
   '/login': typeof LoginRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/beranda'
     | '/lapor'
     | '/login'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/beranda'
     | '/login'
     | '/notifikasi'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/beranda'
     | '/lapor'
     | '/login'
@@ -193,6 +205,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   BerandaRoute: typeof BerandaRoute
   LaporRoute: typeof LaporRouteWithChildren
   LoginRoute: typeof LoginRoute
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       path: '/beranda'
       fullPath: '/beranda'
       preLoaderRoute: typeof BerandaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -335,6 +355,7 @@ const SatpamRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   BerandaRoute: BerandaRoute,
   LaporRoute: LaporRouteWithChildren,
   LoginRoute: LoginRoute,
