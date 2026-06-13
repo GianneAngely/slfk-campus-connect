@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SatpamRouteImport } from './routes/satpam'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ProfilRouteImport } from './routes/profil'
@@ -28,6 +29,11 @@ import { Route as KlaimIdRouteImport } from './routes/klaim.$id'
 import { Route as DetailIdRouteImport } from './routes/detail.$id'
 import { Route as AdminKelolaRouteImport } from './routes/admin.kelola'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SatpamRoute = SatpamRouteImport.update({
   id: '/satpam',
   path: '/satpam',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
   '/satpam': typeof SatpamRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/kelola': typeof AdminKelolaRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/notifikasi': typeof NotifikasiRoute
   '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/kelola': typeof AdminKelolaRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
   '/satpam': typeof SatpamRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/kelola': typeof AdminKelolaRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/register'
     | '/satpam'
+    | '/sitemap.xml'
     | '/admin/kelola'
     | '/detail/$id'
     | '/klaim/$id'
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/notifikasi'
     | '/profil'
     | '/register'
+    | '/sitemap.xml'
     | '/admin/kelola'
     | '/detail/$id'
     | '/klaim/$id'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/register'
     | '/satpam'
+    | '/sitemap.xml'
     | '/admin/kelola'
     | '/detail/$id'
     | '/klaim/$id'
@@ -247,12 +259,20 @@ export interface RootRouteChildren {
   ProfilRoute: typeof ProfilRoute
   RegisterRoute: typeof RegisterRoute
   SatpamRoute: typeof SatpamRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   DetailIdRoute: typeof DetailIdRoute
   KlaimIdRoute: typeof KlaimIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/satpam': {
       id: '/satpam'
       path: '/satpam'
@@ -431,9 +451,20 @@ const rootRouteChildren: RootRouteChildren = {
   ProfilRoute: ProfilRoute,
   RegisterRoute: RegisterRoute,
   SatpamRoute: SatpamRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   DetailIdRoute: DetailIdRoute,
   KlaimIdRoute: KlaimIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
