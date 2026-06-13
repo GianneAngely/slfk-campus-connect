@@ -15,6 +15,7 @@ import { Route as LaporRouteImport } from './routes/lapor'
 import { Route as BerandaRouteImport } from './routes/beranda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LaporIndexRouteImport } from './routes/lapor.index'
+import { Route as LaporHilangRouteImport } from './routes/lapor.hilang'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -46,6 +47,11 @@ const LaporIndexRoute = LaporIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LaporRoute,
 } as any)
+const LaporHilangRoute = LaporHilangRouteImport.update({
+  id: '/hilang',
+  path: '/hilang',
+  getParentRoute: () => LaporRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/lapor': typeof LaporRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lapor/hilang': typeof LaporHilangRoute
   '/lapor/': typeof LaporIndexRoute
 }
 export interface FileRoutesByTo {
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/beranda': typeof BerandaRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lapor/hilang': typeof LaporHilangRoute
   '/lapor': typeof LaporIndexRoute
 }
 export interface FileRoutesById {
@@ -69,13 +77,21 @@ export interface FileRoutesById {
   '/lapor': typeof LaporRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lapor/hilang': typeof LaporHilangRoute
   '/lapor/': typeof LaporIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/beranda' | '/lapor' | '/login' | '/register' | '/lapor/'
+  fullPaths:
+    | '/'
+    | '/beranda'
+    | '/lapor'
+    | '/login'
+    | '/register'
+    | '/lapor/hilang'
+    | '/lapor/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/beranda' | '/login' | '/register' | '/lapor'
+  to: '/' | '/beranda' | '/login' | '/register' | '/lapor/hilang' | '/lapor'
   id:
     | '__root__'
     | '/'
@@ -83,6 +99,7 @@ export interface FileRouteTypes {
     | '/lapor'
     | '/login'
     | '/register'
+    | '/lapor/hilang'
     | '/lapor/'
   fileRoutesById: FileRoutesById
 }
@@ -138,14 +155,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LaporIndexRouteImport
       parentRoute: typeof LaporRoute
     }
+    '/lapor/hilang': {
+      id: '/lapor/hilang'
+      path: '/hilang'
+      fullPath: '/lapor/hilang'
+      preLoaderRoute: typeof LaporHilangRouteImport
+      parentRoute: typeof LaporRoute
+    }
   }
 }
 
 interface LaporRouteChildren {
+  LaporHilangRoute: typeof LaporHilangRoute
   LaporIndexRoute: typeof LaporIndexRoute
 }
 
 const LaporRouteChildren: LaporRouteChildren = {
+  LaporHilangRoute: LaporHilangRoute,
   LaporIndexRoute: LaporIndexRoute,
 }
 
@@ -161,3 +187,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
