@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SatpamRouteImport } from './routes/satpam'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as NotifikasiRouteImport } from './routes/notifikasi'
 import { Route as LoginRouteImport } from './routes/login'
@@ -21,6 +22,11 @@ import { Route as LaporHilangRouteImport } from './routes/lapor.hilang'
 import { Route as KlaimIdRouteImport } from './routes/klaim.$id'
 import { Route as DetailIdRouteImport } from './routes/detail.$id'
 
+const SatpamRoute = SatpamRouteImport.update({
+  id: '/satpam',
+  path: '/satpam',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
+  '/satpam': typeof SatpamRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
+  '/satpam': typeof SatpamRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
+  '/satpam': typeof SatpamRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/notifikasi'
     | '/register'
+    | '/satpam'
     | '/detail/$id'
     | '/klaim/$id'
     | '/lapor/hilang'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/notifikasi'
     | '/register'
+    | '/satpam'
     | '/detail/$id'
     | '/klaim/$id'
     | '/lapor/hilang'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/notifikasi'
     | '/register'
+    | '/satpam'
     | '/detail/$id'
     | '/klaim/$id'
     | '/lapor/hilang'
@@ -164,12 +176,20 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   NotifikasiRoute: typeof NotifikasiRoute
   RegisterRoute: typeof RegisterRoute
+  SatpamRoute: typeof SatpamRoute
   DetailIdRoute: typeof DetailIdRoute
   KlaimIdRoute: typeof KlaimIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/satpam': {
+      id: '/satpam'
+      path: '/satpam'
+      fullPath: '/satpam'
+      preLoaderRoute: typeof SatpamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -271,6 +291,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   NotifikasiRoute: NotifikasiRoute,
   RegisterRoute: RegisterRoute,
+  SatpamRoute: SatpamRoute,
   DetailIdRoute: DetailIdRoute,
   KlaimIdRoute: KlaimIdRoute,
 }
