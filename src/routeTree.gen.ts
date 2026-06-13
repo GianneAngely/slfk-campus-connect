@@ -9,38 +9,326 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SatpamRouteImport } from './routes/satpam'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ProfilRouteImport } from './routes/profil'
+import { Route as NotifikasiRouteImport } from './routes/notifikasi'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as LaporRouteImport } from './routes/lapor'
+import { Route as BerandaRouteImport } from './routes/beranda'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SatpamIndexRouteImport } from './routes/satpam.index'
+import { Route as LaporIndexRouteImport } from './routes/lapor.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as SatpamVerifikasiRouteImport } from './routes/satpam.verifikasi'
+import { Route as LaporTemuanRouteImport } from './routes/lapor.temuan'
+import { Route as LaporHilangRouteImport } from './routes/lapor.hilang'
+import { Route as KlaimIdRouteImport } from './routes/klaim.$id'
+import { Route as DetailIdRouteImport } from './routes/detail.$id'
+import { Route as AdminKelolaRouteImport } from './routes/admin.kelola'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SatpamRoute = SatpamRouteImport.update({
+  id: '/satpam',
+  path: '/satpam',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilRoute = ProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotifikasiRoute = NotifikasiRouteImport.update({
+  id: '/notifikasi',
+  path: '/notifikasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaporRoute = LaporRouteImport.update({
+  id: '/lapor',
+  path: '/lapor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BerandaRoute = BerandaRouteImport.update({
+  id: '/beranda',
+  path: '/beranda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SatpamIndexRoute = SatpamIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SatpamRoute,
+} as any)
+const LaporIndexRoute = LaporIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LaporRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const SatpamVerifikasiRoute = SatpamVerifikasiRouteImport.update({
+  id: '/verifikasi',
+  path: '/verifikasi',
+  getParentRoute: () => SatpamRoute,
+} as any)
+const LaporTemuanRoute = LaporTemuanRouteImport.update({
+  id: '/temuan',
+  path: '/temuan',
+  getParentRoute: () => LaporRoute,
+} as any)
+const LaporHilangRoute = LaporHilangRouteImport.update({
+  id: '/hilang',
+  path: '/hilang',
+  getParentRoute: () => LaporRoute,
+} as any)
+const KlaimIdRoute = KlaimIdRouteImport.update({
+  id: '/klaim/$id',
+  path: '/klaim/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DetailIdRoute = DetailIdRouteImport.update({
+  id: '/detail/$id',
+  path: '/detail/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminKelolaRoute = AdminKelolaRouteImport.update({
+  id: '/kelola',
+  path: '/kelola',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/beranda': typeof BerandaRoute
+  '/lapor': typeof LaporRouteWithChildren
+  '/login': typeof LoginRoute
+  '/notifikasi': typeof NotifikasiRoute
+  '/profil': typeof ProfilRoute
+  '/register': typeof RegisterRoute
+  '/satpam': typeof SatpamRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/kelola': typeof AdminKelolaRoute
+  '/detail/$id': typeof DetailIdRoute
+  '/klaim/$id': typeof KlaimIdRoute
+  '/lapor/hilang': typeof LaporHilangRoute
+  '/lapor/temuan': typeof LaporTemuanRoute
+  '/satpam/verifikasi': typeof SatpamVerifikasiRoute
+  '/admin/': typeof AdminIndexRoute
+  '/lapor/': typeof LaporIndexRoute
+  '/satpam/': typeof SatpamIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/beranda': typeof BerandaRoute
+  '/login': typeof LoginRoute
+  '/notifikasi': typeof NotifikasiRoute
+  '/profil': typeof ProfilRoute
+  '/register': typeof RegisterRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/kelola': typeof AdminKelolaRoute
+  '/detail/$id': typeof DetailIdRoute
+  '/klaim/$id': typeof KlaimIdRoute
+  '/lapor/hilang': typeof LaporHilangRoute
+  '/lapor/temuan': typeof LaporTemuanRoute
+  '/satpam/verifikasi': typeof SatpamVerifikasiRoute
+  '/admin': typeof AdminIndexRoute
+  '/lapor': typeof LaporIndexRoute
+  '/satpam': typeof SatpamIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/beranda': typeof BerandaRoute
+  '/lapor': typeof LaporRouteWithChildren
+  '/login': typeof LoginRoute
+  '/notifikasi': typeof NotifikasiRoute
+  '/profil': typeof ProfilRoute
+  '/register': typeof RegisterRoute
+  '/satpam': typeof SatpamRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/kelola': typeof AdminKelolaRoute
+  '/detail/$id': typeof DetailIdRoute
+  '/klaim/$id': typeof KlaimIdRoute
+  '/lapor/hilang': typeof LaporHilangRoute
+  '/lapor/temuan': typeof LaporTemuanRoute
+  '/satpam/verifikasi': typeof SatpamVerifikasiRoute
+  '/admin/': typeof AdminIndexRoute
+  '/lapor/': typeof LaporIndexRoute
+  '/satpam/': typeof SatpamIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/beranda'
+    | '/lapor'
+    | '/login'
+    | '/notifikasi'
+    | '/profil'
+    | '/register'
+    | '/satpam'
+    | '/sitemap.xml'
+    | '/admin/kelola'
+    | '/detail/$id'
+    | '/klaim/$id'
+    | '/lapor/hilang'
+    | '/lapor/temuan'
+    | '/satpam/verifikasi'
+    | '/admin/'
+    | '/lapor/'
+    | '/satpam/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/beranda'
+    | '/login'
+    | '/notifikasi'
+    | '/profil'
+    | '/register'
+    | '/sitemap.xml'
+    | '/admin/kelola'
+    | '/detail/$id'
+    | '/klaim/$id'
+    | '/lapor/hilang'
+    | '/lapor/temuan'
+    | '/satpam/verifikasi'
+    | '/admin'
+    | '/lapor'
+    | '/satpam'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/beranda'
+    | '/lapor'
+    | '/login'
+    | '/notifikasi'
+    | '/profil'
+    | '/register'
+    | '/satpam'
+    | '/sitemap.xml'
+    | '/admin/kelola'
+    | '/detail/$id'
+    | '/klaim/$id'
+    | '/lapor/hilang'
+    | '/lapor/temuan'
+    | '/satpam/verifikasi'
+    | '/admin/'
+    | '/lapor/'
+    | '/satpam/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  BerandaRoute: typeof BerandaRoute
+  LaporRoute: typeof LaporRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  NotifikasiRoute: typeof NotifikasiRoute
+  ProfilRoute: typeof ProfilRoute
+  RegisterRoute: typeof RegisterRoute
+  SatpamRoute: typeof SatpamRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  DetailIdRoute: typeof DetailIdRoute
+  KlaimIdRoute: typeof KlaimIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/satpam': {
+      id: '/satpam'
+      path: '/satpam'
+      fullPath: '/satpam'
+      preLoaderRoute: typeof SatpamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profil': {
+      id: '/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof ProfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifikasi': {
+      id: '/notifikasi'
+      path: '/notifikasi'
+      fullPath: '/notifikasi'
+      preLoaderRoute: typeof NotifikasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lapor': {
+      id: '/lapor'
+      path: '/lapor'
+      fullPath: '/lapor'
+      preLoaderRoute: typeof LaporRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beranda': {
+      id: '/beranda'
+      path: '/beranda'
+      fullPath: '/beranda'
+      preLoaderRoute: typeof BerandaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +336,125 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/satpam/': {
+      id: '/satpam/'
+      path: '/'
+      fullPath: '/satpam/'
+      preLoaderRoute: typeof SatpamIndexRouteImport
+      parentRoute: typeof SatpamRoute
+    }
+    '/lapor/': {
+      id: '/lapor/'
+      path: '/'
+      fullPath: '/lapor/'
+      preLoaderRoute: typeof LaporIndexRouteImport
+      parentRoute: typeof LaporRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/satpam/verifikasi': {
+      id: '/satpam/verifikasi'
+      path: '/verifikasi'
+      fullPath: '/satpam/verifikasi'
+      preLoaderRoute: typeof SatpamVerifikasiRouteImport
+      parentRoute: typeof SatpamRoute
+    }
+    '/lapor/temuan': {
+      id: '/lapor/temuan'
+      path: '/temuan'
+      fullPath: '/lapor/temuan'
+      preLoaderRoute: typeof LaporTemuanRouteImport
+      parentRoute: typeof LaporRoute
+    }
+    '/lapor/hilang': {
+      id: '/lapor/hilang'
+      path: '/hilang'
+      fullPath: '/lapor/hilang'
+      preLoaderRoute: typeof LaporHilangRouteImport
+      parentRoute: typeof LaporRoute
+    }
+    '/klaim/$id': {
+      id: '/klaim/$id'
+      path: '/klaim/$id'
+      fullPath: '/klaim/$id'
+      preLoaderRoute: typeof KlaimIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/detail/$id': {
+      id: '/detail/$id'
+      path: '/detail/$id'
+      fullPath: '/detail/$id'
+      preLoaderRoute: typeof DetailIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/kelola': {
+      id: '/admin/kelola'
+      path: '/kelola'
+      fullPath: '/admin/kelola'
+      preLoaderRoute: typeof AdminKelolaRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminKelolaRoute: typeof AdminKelolaRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminKelolaRoute: AdminKelolaRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface LaporRouteChildren {
+  LaporHilangRoute: typeof LaporHilangRoute
+  LaporTemuanRoute: typeof LaporTemuanRoute
+  LaporIndexRoute: typeof LaporIndexRoute
+}
+
+const LaporRouteChildren: LaporRouteChildren = {
+  LaporHilangRoute: LaporHilangRoute,
+  LaporTemuanRoute: LaporTemuanRoute,
+  LaporIndexRoute: LaporIndexRoute,
+}
+
+const LaporRouteWithChildren = LaporRoute._addFileChildren(LaporRouteChildren)
+
+interface SatpamRouteChildren {
+  SatpamVerifikasiRoute: typeof SatpamVerifikasiRoute
+  SatpamIndexRoute: typeof SatpamIndexRoute
+}
+
+const SatpamRouteChildren: SatpamRouteChildren = {
+  SatpamVerifikasiRoute: SatpamVerifikasiRoute,
+  SatpamIndexRoute: SatpamIndexRoute,
+}
+
+const SatpamRouteWithChildren =
+  SatpamRoute._addFileChildren(SatpamRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  BerandaRoute: BerandaRoute,
+  LaporRoute: LaporRouteWithChildren,
+  LoginRoute: LoginRoute,
+  NotifikasiRoute: NotifikasiRoute,
+  ProfilRoute: ProfilRoute,
+  RegisterRoute: RegisterRoute,
+  SatpamRoute: SatpamRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  DetailIdRoute: DetailIdRoute,
+  KlaimIdRoute: KlaimIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
