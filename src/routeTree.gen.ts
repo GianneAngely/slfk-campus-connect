@@ -18,6 +18,7 @@ import { Route as BerandaRouteImport } from './routes/beranda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SatpamIndexRouteImport } from './routes/satpam.index'
 import { Route as LaporIndexRouteImport } from './routes/lapor.index'
+import { Route as SatpamVerifikasiRouteImport } from './routes/satpam.verifikasi'
 import { Route as LaporTemuanRouteImport } from './routes/lapor.temuan'
 import { Route as LaporHilangRouteImport } from './routes/lapor.hilang'
 import { Route as KlaimIdRouteImport } from './routes/klaim.$id'
@@ -68,6 +69,11 @@ const LaporIndexRoute = LaporIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LaporRoute,
 } as any)
+const SatpamVerifikasiRoute = SatpamVerifikasiRouteImport.update({
+  id: '/verifikasi',
+  path: '/verifikasi',
+  getParentRoute: () => SatpamRoute,
+} as any)
 const LaporTemuanRoute = LaporTemuanRouteImport.update({
   id: '/temuan',
   path: '/temuan',
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
   '/lapor/temuan': typeof LaporTemuanRoute
+  '/satpam/verifikasi': typeof SatpamVerifikasiRoute
   '/lapor/': typeof LaporIndexRoute
   '/satpam/': typeof SatpamIndexRoute
 }
@@ -114,6 +121,7 @@ export interface FileRoutesByTo {
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
   '/lapor/temuan': typeof LaporTemuanRoute
+  '/satpam/verifikasi': typeof SatpamVerifikasiRoute
   '/lapor': typeof LaporIndexRoute
   '/satpam': typeof SatpamIndexRoute
 }
@@ -130,6 +138,7 @@ export interface FileRoutesById {
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
   '/lapor/temuan': typeof LaporTemuanRoute
+  '/satpam/verifikasi': typeof SatpamVerifikasiRoute
   '/lapor/': typeof LaporIndexRoute
   '/satpam/': typeof SatpamIndexRoute
 }
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/klaim/$id'
     | '/lapor/hilang'
     | '/lapor/temuan'
+    | '/satpam/verifikasi'
     | '/lapor/'
     | '/satpam/'
   fileRoutesByTo: FileRoutesByTo
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/klaim/$id'
     | '/lapor/hilang'
     | '/lapor/temuan'
+    | '/satpam/verifikasi'
     | '/lapor'
     | '/satpam'
   id:
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/klaim/$id'
     | '/lapor/hilang'
     | '/lapor/temuan'
+    | '/satpam/verifikasi'
     | '/lapor/'
     | '/satpam/'
   fileRoutesById: FileRoutesById
@@ -256,6 +268,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LaporIndexRouteImport
       parentRoute: typeof LaporRoute
     }
+    '/satpam/verifikasi': {
+      id: '/satpam/verifikasi'
+      path: '/verifikasi'
+      fullPath: '/satpam/verifikasi'
+      preLoaderRoute: typeof SatpamVerifikasiRouteImport
+      parentRoute: typeof SatpamRoute
+    }
     '/lapor/temuan': {
       id: '/lapor/temuan'
       path: '/temuan'
@@ -302,10 +321,12 @@ const LaporRouteChildren: LaporRouteChildren = {
 const LaporRouteWithChildren = LaporRoute._addFileChildren(LaporRouteChildren)
 
 interface SatpamRouteChildren {
+  SatpamVerifikasiRoute: typeof SatpamVerifikasiRoute
   SatpamIndexRoute: typeof SatpamIndexRoute
 }
 
 const SatpamRouteChildren: SatpamRouteChildren = {
+  SatpamVerifikasiRoute: SatpamVerifikasiRoute,
   SatpamIndexRoute: SatpamIndexRoute,
 }
 
