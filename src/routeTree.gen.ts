@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SatpamRouteImport } from './routes/satpam'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ProfilRouteImport } from './routes/profil'
 import { Route as NotifikasiRouteImport } from './routes/notifikasi'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LaporRouteImport } from './routes/lapor'
@@ -35,6 +36,11 @@ const SatpamRoute = SatpamRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilRoute = ProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotifikasiRoute = NotifikasiRouteImport.update({
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/lapor': typeof LaporRouteWithChildren
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
+  '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
   '/satpam': typeof SatpamRouteWithChildren
   '/admin/kelola': typeof AdminKelolaRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/beranda': typeof BerandaRoute
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
+  '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
   '/admin/kelola': typeof AdminKelolaRoute
   '/detail/$id': typeof DetailIdRoute
@@ -156,6 +164,7 @@ export interface FileRoutesById {
   '/lapor': typeof LaporRouteWithChildren
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
+  '/profil': typeof ProfilRoute
   '/register': typeof RegisterRoute
   '/satpam': typeof SatpamRouteWithChildren
   '/admin/kelola': typeof AdminKelolaRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/lapor'
     | '/login'
     | '/notifikasi'
+    | '/profil'
     | '/register'
     | '/satpam'
     | '/admin/kelola'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/beranda'
     | '/login'
     | '/notifikasi'
+    | '/profil'
     | '/register'
     | '/admin/kelola'
     | '/detail/$id'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/lapor'
     | '/login'
     | '/notifikasi'
+    | '/profil'
     | '/register'
     | '/satpam'
     | '/admin/kelola'
@@ -232,6 +244,7 @@ export interface RootRouteChildren {
   LaporRoute: typeof LaporRouteWithChildren
   LoginRoute: typeof LoginRoute
   NotifikasiRoute: typeof NotifikasiRoute
+  ProfilRoute: typeof ProfilRoute
   RegisterRoute: typeof RegisterRoute
   SatpamRoute: typeof SatpamRouteWithChildren
   DetailIdRoute: typeof DetailIdRoute
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profil': {
+      id: '/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof ProfilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/notifikasi': {
@@ -408,6 +428,7 @@ const rootRouteChildren: RootRouteChildren = {
   LaporRoute: LaporRouteWithChildren,
   LoginRoute: LoginRoute,
   NotifikasiRoute: NotifikasiRoute,
+  ProfilRoute: ProfilRoute,
   RegisterRoute: RegisterRoute,
   SatpamRoute: SatpamRouteWithChildren,
   DetailIdRoute: DetailIdRoute,
