@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as LaporRouteImport } from './routes/lapor'
 import { Route as BerandaRouteImport } from './routes/beranda'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SatpamIndexRouteImport } from './routes/satpam.index'
 import { Route as LaporIndexRouteImport } from './routes/lapor.index'
 import { Route as LaporTemuanRouteImport } from './routes/lapor.temuan'
 import { Route as LaporHilangRouteImport } from './routes/lapor.hilang'
@@ -57,6 +58,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SatpamIndexRoute = SatpamIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SatpamRoute,
+} as any)
 const LaporIndexRoute = LaporIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -90,12 +96,13 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
-  '/satpam': typeof SatpamRoute
+  '/satpam': typeof SatpamRouteWithChildren
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
   '/lapor/temuan': typeof LaporTemuanRoute
   '/lapor/': typeof LaporIndexRoute
+  '/satpam/': typeof SatpamIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -103,12 +110,12 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
-  '/satpam': typeof SatpamRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
   '/lapor/temuan': typeof LaporTemuanRoute
   '/lapor': typeof LaporIndexRoute
+  '/satpam': typeof SatpamIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -118,12 +125,13 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
-  '/satpam': typeof SatpamRoute
+  '/satpam': typeof SatpamRouteWithChildren
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
   '/lapor/temuan': typeof LaporTemuanRoute
   '/lapor/': typeof LaporIndexRoute
+  '/satpam/': typeof SatpamIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,6 +148,7 @@ export interface FileRouteTypes {
     | '/lapor/hilang'
     | '/lapor/temuan'
     | '/lapor/'
+    | '/satpam/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -147,12 +156,12 @@ export interface FileRouteTypes {
     | '/login'
     | '/notifikasi'
     | '/register'
-    | '/satpam'
     | '/detail/$id'
     | '/klaim/$id'
     | '/lapor/hilang'
     | '/lapor/temuan'
     | '/lapor'
+    | '/satpam'
   id:
     | '__root__'
     | '/'
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/lapor/hilang'
     | '/lapor/temuan'
     | '/lapor/'
+    | '/satpam/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -176,7 +186,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   NotifikasiRoute: typeof NotifikasiRoute
   RegisterRoute: typeof RegisterRoute
-  SatpamRoute: typeof SatpamRoute
+  SatpamRoute: typeof SatpamRouteWithChildren
   DetailIdRoute: typeof DetailIdRoute
   KlaimIdRoute: typeof KlaimIdRoute
 }
@@ -232,6 +242,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/satpam/': {
+      id: '/satpam/'
+      path: '/'
+      fullPath: '/satpam/'
+      preLoaderRoute: typeof SatpamIndexRouteImport
+      parentRoute: typeof SatpamRoute
+    }
     '/lapor/': {
       id: '/lapor/'
       path: '/'
@@ -284,6 +301,17 @@ const LaporRouteChildren: LaporRouteChildren = {
 
 const LaporRouteWithChildren = LaporRoute._addFileChildren(LaporRouteChildren)
 
+interface SatpamRouteChildren {
+  SatpamIndexRoute: typeof SatpamIndexRoute
+}
+
+const SatpamRouteChildren: SatpamRouteChildren = {
+  SatpamIndexRoute: SatpamIndexRoute,
+}
+
+const SatpamRouteWithChildren =
+  SatpamRoute._addFileChildren(SatpamRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BerandaRoute: BerandaRoute,
@@ -291,7 +319,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   NotifikasiRoute: NotifikasiRoute,
   RegisterRoute: RegisterRoute,
-  SatpamRoute: SatpamRoute,
+  SatpamRoute: SatpamRouteWithChildren,
   DetailIdRoute: DetailIdRoute,
   KlaimIdRoute: KlaimIdRoute,
 }
