@@ -132,9 +132,6 @@ function LoginPage() {
         {/* Role chips */}
         <div className="mt-7 rounded-3xl border border-border bg-card p-4 shadow-soft">
           <p className="font-heading text-sm font-bold text-navy">Akun Akses</p>
-          <p className="mb-3 text-xs text-muted-foreground">
-            Pilih peran untuk mengisi data masuk otomatis.
-          </p>
           <div className="grid grid-cols-3 gap-2">
             {ROLE_CHIPS.map((chip) => {
               const Icon = chip.icon;
