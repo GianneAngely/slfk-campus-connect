@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LaporRouteImport } from './routes/lapor'
 import { Route as BerandaRouteImport } from './routes/beranda'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -22,6 +23,11 @@ const RegisterRoute = RegisterRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaporRoute = LaporRouteImport.update({
+  id: '/lapor',
+  path: '/lapor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BerandaRoute = BerandaRouteImport.update({
@@ -38,12 +44,14 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/beranda': typeof BerandaRoute
+  '/lapor': typeof LaporRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/beranda': typeof BerandaRoute
+  '/lapor': typeof LaporRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/beranda': typeof BerandaRoute
+  '/lapor': typeof LaporRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/beranda' | '/login' | '/register'
+  fullPaths: '/' | '/beranda' | '/lapor' | '/login' | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/beranda' | '/login' | '/register'
-  id: '__root__' | '/' | '/beranda' | '/login' | '/register'
+  to: '/' | '/beranda' | '/lapor' | '/login' | '/register'
+  id: '__root__' | '/' | '/beranda' | '/lapor' | '/login' | '/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BerandaRoute: typeof BerandaRoute
+  LaporRoute: typeof LaporRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lapor': {
+      id: '/lapor'
+      path: '/lapor'
+      fullPath: '/lapor'
+      preLoaderRoute: typeof LaporRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/beranda': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BerandaRoute: BerandaRoute,
+  LaporRoute: LaporRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
 }
