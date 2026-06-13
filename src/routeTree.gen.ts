@@ -25,6 +25,7 @@ import { Route as LaporTemuanRouteImport } from './routes/lapor.temuan'
 import { Route as LaporHilangRouteImport } from './routes/lapor.hilang'
 import { Route as KlaimIdRouteImport } from './routes/klaim.$id'
 import { Route as DetailIdRouteImport } from './routes/detail.$id'
+import { Route as AdminKelolaRouteImport } from './routes/admin.kelola'
 
 const SatpamRoute = SatpamRouteImport.update({
   id: '/satpam',
@@ -106,6 +107,11 @@ const DetailIdRoute = DetailIdRouteImport.update({
   path: '/detail/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminKelolaRoute = AdminKelolaRouteImport.update({
+  id: '/kelola',
+  path: '/kelola',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
   '/satpam': typeof SatpamRouteWithChildren
+  '/admin/kelola': typeof AdminKelolaRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
+  '/admin/kelola': typeof AdminKelolaRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/notifikasi': typeof NotifikasiRoute
   '/register': typeof RegisterRoute
   '/satpam': typeof SatpamRouteWithChildren
+  '/admin/kelola': typeof AdminKelolaRoute
   '/detail/$id': typeof DetailIdRoute
   '/klaim/$id': typeof KlaimIdRoute
   '/lapor/hilang': typeof LaporHilangRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/notifikasi'
     | '/register'
     | '/satpam'
+    | '/admin/kelola'
     | '/detail/$id'
     | '/klaim/$id'
     | '/lapor/hilang'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/notifikasi'
     | '/register'
+    | '/admin/kelola'
     | '/detail/$id'
     | '/klaim/$id'
     | '/lapor/hilang'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/notifikasi'
     | '/register'
     | '/satpam'
+    | '/admin/kelola'
     | '/detail/$id'
     | '/klaim/$id'
     | '/lapor/hilang'
@@ -340,14 +352,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DetailIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/kelola': {
+      id: '/admin/kelola'
+      path: '/kelola'
+      fullPath: '/admin/kelola'
+      preLoaderRoute: typeof AdminKelolaRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminKelolaRoute: typeof AdminKelolaRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminKelolaRoute: AdminKelolaRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
