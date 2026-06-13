@@ -108,7 +108,7 @@ export function SectionTitle({
   action,
 }: {
   title: string;
-  action?: ReactNodeLike;
+  action?: React.ReactNode;
 }) {
   return (
     <div className="mb-3 flex items-center justify-between">
@@ -118,4 +118,3 @@ export function SectionTitle({
   );
 }
 
-type ReactNodeLike = React.ReactNode;
