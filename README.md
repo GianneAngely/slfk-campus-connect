@@ -2,7 +2,9 @@
 
 A campus lost-and-found system: report items you've lost or found, browse and claim them, and let campus security verify each hand-over. *Temukan. Klaim. Kembalikan.* — Find. Claim. Return.
 
-![SLFK splash screen](screenshot.png)
+**Live demo → [slfk-campus-connect.vercel.app](https://slfk-campus-connect.vercel.app)** · sign in with a demo account below
+
+![SLFK home screen](screenshot.png)
 
 ## Overview
 
